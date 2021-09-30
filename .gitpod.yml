@@ -13,10 +13,14 @@ tasks:
 
       flutter pub get
 
+      flutter packages get
+
       flutter build -v bundle
       flutter build -v web
       flutter build -v appbundle
       flutter build -v apk
+
+      flutter run --release -d web-server
       
   - command: |
       # Gitpod is not able to run emulators within a worspace at this stage as

@@ -61,6 +61,7 @@ tasks:
       flutter devices
     
       #flutter run --web-port 8080
+      flutter packages get
       flutter run --release -d web-server
 
 

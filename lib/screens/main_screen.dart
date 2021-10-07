@@ -1,5 +1,7 @@
 import 'package:night_trains/screens/hup2.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MainScreen extends StatefulWidget {
   static const String id = 'MainScreen';
@@ -10,7 +12,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   // this dummy data will be displayed in the table
-  final List<Map> _users = [
+ /* final List<Map> _users = [
     {
       'id': 'id',
       'name': 'Route',
@@ -83,7 +85,13 @@ class _MainScreenState extends State<MainScreen> {
       'stops': 7,
       'miles': 1,
     }
-  ];
+  ];*/
+
+  //var traindata =*/ getTrainData();
+  
+  var kobodata = getTrainData();
+
+   List<Map> _users = kobodata.cast<List<Map>>();
 
   @override
   Widget build(BuildContext context) {
@@ -223,4 +231,21 @@ class _MainScreenState extends State<MainScreen> {
       }),
     );
   }
+}
+
+Future<List<Map>> getTrainData() async {
+  var decodedData;
+
+  String filej = 'https://hup2.com/flutter/night_trains.php';
+
+  http.Response response = await http.get(
+    Uri.parse(filej),
+  );
+
+  if (response.statusCode == 200) {
+    decodedData = response.body;
+    decodedData = jsonDecode(response.body);
+  }
+
+  return decodedData.cast<List<Map>>();
 }

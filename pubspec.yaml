@@ -31,6 +31,8 @@ dependencies:
   #google_maps_flutter: ^2.0.10
   #google_maps_flutter_web: ^0.3.0+4
   url_launcher: ^6.0.10
+  http: ^0.13.1
+  html: ^0.14.0+3
 
 dev_dependencies:
   flutter_test:

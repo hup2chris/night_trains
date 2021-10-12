@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:night_trains/screens/main_screen.dart';
-//import 'package:hello_world/screens/main_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
- // GoogleMapController mapController;
+  // GoogleMapController mapController;
 
- /* final LatLng _center = const LatLng(53.9000, 4.1167);
+  /* final LatLng _center = const LatLng(53.9000, 4.1167);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         MainScreen.id: (context) => MainScreen(),
       },
       debugShowCheckedModeBanner: false,
-     /* home: Scaffold(
+      /* home: Scaffold(
         appBar: AppBar(
           title: const Text('European Night Trains'),
           backgroundColor: Colors.green[700],

@@ -1,7 +1,8 @@
 import 'package:night_trains/screens/hup2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+//import 'dart:convert';
+import 'package:night_trains/screens/train_data.dart';
 
 class MainScreen extends StatefulWidget {
   static const String id = 'MainScreen';
@@ -11,8 +12,114 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  List<Map> _users = [];
+
+  void getData() async {
+    try {
+      var kobodata = await TrainsData().getTrainsData();
+
+      //_users = await TrainsData().getTrainsData();
+      setState(() {
+        // hamount = kobodata['hamount'];
+        _users = kobodata;
+        _users = [
+          {
+            'id': 'id',
+            'name': 'Route',
+            'op': 'Service setstate',
+            'ocu': 'Per Week',
+            'stops': 'Stops',
+            'miles': 'Miles',
+          }
+        ];
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+    /*_users = [
+    {
+      'id': 'id',
+      'name': 'Route',
+      'op': 'Service',
+      'ocu': 'Per Week',
+      'stops': 'Stops',
+      'miles': 'Miles',
+    },
+    {
+      'id': 1,
+      'name': 'Barcelona - A Coruña',
+      'op': 'TrenHotel Chris Galicia',
+      'ocu': 7,
+      'stops': 3,
+      'miles': 1,
+    },
+    {
+      'id': 2,
+      'name': 'Barcelona - Vigo',
+      'op': 'TrenHotel Galicia',
+      'ocu': 7,
+      'stops': 3,
+      'miles': 1,
+    },
+    {
+      'id': 3,
+      'name': 'Berlin - Budapest',
+      'op': 'NightJet',
+      'ocu': 7,
+      'stops': 2,
+      'miles': 1,
+    },
+    {
+      'id': 4,
+      'name': 'Berlin - Przemysl',
+      'op': 'NightJet',
+      'ocu': 7,
+      'stops': 2,
+      'miles': 1,
+    },
+    {
+      'id': 5,
+      'name': 'Berlin - Vienna',
+      'op': 'NightJet',
+      'ocu': 7,
+      'stops': 2,
+      'miles': 1,
+    },
+    {
+      'id': 6,
+      'name': 'Berlin - Zurich',
+      'op': 'NightJet',
+      'ocu': 7,
+      'stops': 7,
+      'miles': 1,
+    },
+    {
+      'id': 7,
+      'name': 'Berlin - Paris',
+      'op': 'NightJet',
+      'ocu': 1,
+      'stops': 3,
+      'miles': 1,
+    },
+    {
+      'id': 8,
+      'name': 'Brussels - Vienna',
+      'op': 'NightJet',
+      'ocu': 2,
+      'stops': 7,
+      'miles': 1,
+    }
+  ];*/
+  }
+
   // this dummy data will be displayed in the table
- /* final List<Map> _users = [
+  /* final List<Map> _users = [
     {
       'id': 'id',
       'name': 'Route',
@@ -88,10 +195,10 @@ class _MainScreenState extends State<MainScreen> {
   ];*/
 
   //var traindata =*/ getTrainData();
-  
-  var kobodata = getTrainData();
 
-   List<Map> _users = kobodata.cast<List<Map>>();
+  //var kobodata = getTrainData();
+
+  // List<Map> _users = kobodata; //.cast<List<Map>>();
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +351,8 @@ Future<List<Map>> getTrainData() async {
 
   if (response.statusCode == 200) {
     decodedData = response.body;
-    decodedData = jsonDecode(response.body);
+    // decodedData = jsonDecode(response.body);
   }
 
-  return decodedData.cast<List<Map>>();
+  return decodedData; //.cast<List<Map>>();
 }

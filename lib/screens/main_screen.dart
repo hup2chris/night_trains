@@ -13,16 +13,23 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   List<Map> _users = [];
+  var trainsdata;
 
   void getData() async {
     try {
       var kobodata = await TrainsData().getTrainsData();
 
+      print('got to getData ');
+    //  print(kobodata[0]['name']);
+      print(kobodata);
+
       //_users = await TrainsData().getTrainsData();
       setState(() {
         // hamount = kobodata['hamount'];
-        _users = kobodata;
-        _users = [
+        trainsdata = kobodata;
+     //   List<Map> userData = List<Map>.from(kobodata);
+        _users = List<Map>.from(kobodata);
+      /*  _users = [
           {
             'id': 'id',
             'name': 'Route',
@@ -31,9 +38,10 @@ class _MainScreenState extends State<MainScreen> {
             'stops': 'Stops',
             'miles': 'Miles',
           }
-        ];
+        ];*/
       });
     } catch (e) {
+      print('there was an error ');
       print(e);
     }
   }
@@ -270,7 +278,8 @@ class _MainScreenState extends State<MainScreen> {
                                       ? Colors.blue[50]
                                       : Colors.amber[50],
                                   padding: EdgeInsets.all(15),
-                                  child: Text(user['name'].toString())),
+                                  //child: Text(user['name'].toString())),
+                                  child: Text(trainsdata[0]['name'].toString())),
                               Container(
                                   color: _users.indexOf(user) % 2 == 0
                                       ? Colors.blue[50]
@@ -298,7 +307,7 @@ class _MainScreenState extends State<MainScreen> {
                             ]);
                           }).toList(),
                           border:
-                              TableBorder.all(width: 1, color: Colors.black),
+                          TableBorder.all(width: 1, color: Colors.black),
                         ),
                       ),
                     ),

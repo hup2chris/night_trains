@@ -52,7 +52,7 @@ class Shop  {
   Shop(this.surl);
 
   launchPage () async {
-    //String url = surl;
+    String url = surl;
 
     try {
       await launch(surl);
